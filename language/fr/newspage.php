@@ -25,8 +25,8 @@ $lang = array_merge($lang, array(
 	'NEWS_ADD_NEW'				=> 'Écrire une nouvelle',
 	'NEWS_ADD_NEW_TITLE'		=> 'Ajouter des nouvelles',
 	'NEWS_ARCHIVE_SHOW'			=> 'Permettre de classer par date',
-	'NEWS_ARCHIVE'				=> 'Archive',
-	'NEWS_ARCHIVE_OF'			=> 'Archive %s',
+	'NEWS_ARCHIVE'				=> 'Archives',
+	'NEWS_ARCHIVE_OF'			=> 'Archives du %s',
 	'NEWS_ATTACH_SHOW'			=> 'Afficher les pièces jointes',
 	'NEWS_ATTACH_SHOW_EXPLAIN'	=> 'Les pièces jointes en ligne seront toujours affichées.',
 	'NEWS_CAT'					=> 'Catégories',
@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'NO_NEWS_ARCHIVE'			=> 'Il n’y a aucune nouvelle dans cette archive.',
 	'NO_NEWS_CATEGORY'			=> 'Il n’y a aucune nouvelle dans cette catégorie.',
 
-	'NEWSPAGE'					=> '&nbsp;Nouvelles',
+	'NEWSPAGE'					=> 'Nouvelles',
 
 	'VIEW_NEWS_POSTS'			=> array(
 		0	=> 'Aucune nouvelle',
