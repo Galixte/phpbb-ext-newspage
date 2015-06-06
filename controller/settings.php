@@ -34,6 +34,9 @@ class settings
 	/* @var \phpbb\controller\helper */
 	protected $helper;
 
+	/* @var \phpbb\user */
+	protected $user;
+
 	/**
 	 * Constructor
 	 *
@@ -41,13 +44,15 @@ class settings
 	 * @param \phpbb\config\config $config
 	 * @param \phpbb\request\request_interface $request
 	 * @param \phpbb\controller\helper $helper
+	 * @param \phpbb\user $user
 	 */
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\request\request_interface $request, \phpbb\controller\helper $helper)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\request\request_interface $request, \phpbb\controller\helper $helper, \phpbb\user $user)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->request = $request;
 		$this->helper = $helper;
+		$this->user = $user;
 	}
 
 	/**
@@ -71,7 +76,16 @@ class settings
 			throw new http_exception(400, 'FORM_INVALID');
 		}
 
-		$this->config->set('news_char_limit',	max(100, $this->request->variable('news_char_limit', 0)));
+		if ($this->request->variable('news_char_limit', 0) !== 0)
+		{
+			$this->config->set('news_char_limit',	max(100, $this->request->variable('news_char_limit', 0)));
+		}
+		else
+		{
+			// "0" means no trimming
+			$this->config->set('news_char_limit', 0);
+		}
+
 		$this->config->set('news_forums',		implode(',', $this->request->variable('news_forums', array(0))));
 		$this->config->set('news_number',		max(1, $this->request->variable('news_number', 0)));
 		$this->config->set('news_pages',		max(1, $this->request->variable('news_pages', 0)));
@@ -82,6 +96,7 @@ class settings
 		$this->config->set('news_cat_show',		$this->request->variable('news_cat_show', false));
 		$this->config->set('news_archive_show',	$this->request->variable('news_archive_show', false));
 
+		$this->user->add_lang_ext('nickvergessen/newspage', 'newspage');
 		return $this->helper->message('NEWS_SAVED');
 	}
 
@@ -92,6 +107,6 @@ class settings
 	 */
 	public function meta_refresh()
 	{
-		meta_refresh(10, $this->helper->route('nickvergessen_newspage_controller'));
+		meta_refresh(3, $this->helper->route('nickvergessen_newspage_controller'));
 	}
 }
